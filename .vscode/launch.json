@@ -2,17 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: unittest module",
+      "name": "Python: Django",
       "type": "python",
       "request": "launch",
-      "module": "unittest",
-      "args": ["discover", "tests"]
-    },
-    {
-      "name": "Python: app module",
-      "type": "python",
-      "request": "launch",
-      "module": "app.main"
+      "program": "${workspaceFolder}\\manage.py",
+      "args": ["runserver", "--noreload"],
+      "django": true
     }
   ]
 }
