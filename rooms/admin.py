@@ -42,7 +42,11 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities",
     )
+
+    # default ordering value
+    ordering = ("name", "price", "bedrooms")
 
     list_filter = (
         "instant_book",
@@ -61,6 +65,15 @@ class RoomAdmin(admin.ModelAdmin):
         "facility",
         "house_rule",
     )
+
+    def count_amenities(self, obj):
+        # obj <= room model
+        # obj.amenities <= query set
+        # obj.amenities.count <= function
+        # obj.amenities.count() <= integer
+        return obj.amenities.count()
+
+    count_amenities.short_description = "Count of Amenities"
 
 
 @admin.register(models.Photo)
