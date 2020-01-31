@@ -29,7 +29,7 @@ class User(AbstractUser):
 
     CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_WON, "KRW"))
 
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
     bio = models.TextField(blank=True)
     birthday = models.DateField(blank=True, null=True)

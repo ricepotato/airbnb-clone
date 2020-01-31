@@ -15,7 +15,7 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "avatar",
                     "gender",
                     "bio",
-                    "birthdate",
+                    "birthday",
                     "language",
                     "currency",
                     "superhost",
