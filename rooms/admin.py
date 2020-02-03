@@ -26,7 +26,7 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Basic Info",
-            {"fields": ("name", "description", "country", "address", "price")},
+            {"fields": ("name", "description", "country", "city", "address", "price")},
         ),
         ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths")},),
         ("Times", {"fields": ("check_in", "check_out", "instant_book")},),
@@ -78,6 +78,10 @@ class RoomAdmin(admin.ModelAdmin):
         "facility",
         "house_rule",
     )
+
+    def save_model(self, request, obj, form, change):
+        # obj.user = request.user
+        super().save_model(request, obj, form, change)
 
     def count_amenities(self, obj):
         # obj <= room model
