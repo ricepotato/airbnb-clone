@@ -13,11 +13,6 @@
   "editor.formatOnSave": true,
   "python.testing.promptToConfigure": false,
   "[django-html]": {
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": true,
-      "strings": true
-    },
-    "editor.defaultFormatter": "batisteo.vscode-django"
+    "editor.formatOnSave": false
   }
 }
