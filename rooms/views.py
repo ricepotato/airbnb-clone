@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.core.paginator import EmptyPage, Paginator
 from django.views.generic import ListView, DetailView
+from django_countries import countries
 from . import models
 
 
@@ -48,3 +49,14 @@ def room_detail(request, pk):
 
 class ModelNameDetail(DetailView):
     model = models.Room
+
+
+def search(request):
+    city = request.GET.get("city", "")
+    city = str.capitalize(city)
+    room_types = models.RoomType.objects.all()
+    return render(
+        request,
+        "rooms/search.html",
+        context={"city": city, "countries": countries, "room_types": room_types},
+    )
