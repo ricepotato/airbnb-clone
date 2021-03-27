@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.http import Http404
 from django.core.paginator import EmptyPage, Paginator
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from . import models
 
 
@@ -33,3 +35,16 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+def room_detail(request, pk):
+    try:
+        room = models.Room.objects.get(pk=pk)
+        return render(request, "rooms/detail.html", context={"room": room})
+    except models.Room.DoesNotExist:
+        # return redirect(reverse("core:home"))
+        raise Http404()
+
+
+class ModelNameDetail(DetailView):
+    model = models.Room
