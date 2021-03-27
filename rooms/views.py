@@ -68,8 +68,8 @@ def search(request):
 
     amenities = models.Amenity.objects.all()
     facilities = models.Facility.objects.all()
-    instant = request.GET.get("instant", False)
-    super_host = request.GET.get("super_host", False)
+    instant = bool(request.GET.get("instant", False))
+    super_host = bool(request.GET.get("super_host", False))
 
     choices = {
         "countries": countries,
@@ -93,8 +93,45 @@ def search(request):
         "super_host": super_host,
     }
 
+    filter_args = {}
+    if city != "Anywhere":
+        filter_args["city__startswith"] = city
+
+    filter_args["country"] = country
+
+    if room_type != 0:
+        filter_args["room_type__pk"] = room_type
+
+    if price != 0:
+        filter_args["price__lte"] = price
+
+    if guests != 0:
+        filter_args["guests__gte"] = guests
+
+    if beds != 0:
+        filter_args["beds__gte"] = beds
+
+    if baths != 0:
+        filter_args["baths_gte"] = baths
+
+    if instant:
+        filter_args["instant_book"] = True
+
+    if super_host:
+        filter_args["host__superhost"] = True
+
+    if s_amenities:
+        for s_a in s_amenities:
+            filter_args["amenities__pk"] = int(s_a)
+
+    if s_facilities:
+        for s_f in s_facilities:
+            filter_args["facilities__pk"] = int(s_f)
+
+    rooms = models.Room.objects.filter(**filter_args)
+
     return render(
         request,
         "rooms/search.html",
-        context={**form, **choices},
+        context={**form, **choices, "rooms": rooms},
     )
