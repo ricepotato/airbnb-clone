@@ -1,8 +1,12 @@
 {% extends 'base.html' %} 
+{% load static %}
 
 {% block page_title %}Home {% endblock %}
 
 {% block content %} 
+
+  <div class="container rounded-xl mx-auto bg-gray-800 w-full h-50vh mt-32 mb-24 bg-cover bg-center" style="background-image:url({% static "img/bg.jpeg" %})">
+  </div>
 
 {% for room in rooms %}
 
