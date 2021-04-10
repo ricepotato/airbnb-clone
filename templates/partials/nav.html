@@ -1,5 +1,7 @@
+{% load static %}
 
-<a href="{% url "core:home" %}">NBnb</a>
-<ul>
-    <li><a href="{% url "users:login" %}">Login </a></li>
+<ul class="flex item-center text-sm font-medium h-full">
+    <li class="nav_link">
+        <a href="{% url "users:login" %}">Login </a>
+    </li>
 </ul>
