@@ -133,3 +133,4 @@ dmypy.json
 uploads/
 */migrations/*
 node_modules/
+static/css/styles.css
